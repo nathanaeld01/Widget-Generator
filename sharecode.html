@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            @font-face {
+              font-family: 'Inter Bold';
+              src: url('fonts/Inter-Bold.ttf')  format('truetype'); /* Safari, Android, iOS */
+            }
+            @font-face {
+              font-family: 'Inter Regular';
+              src: url('fonts/Inter-Regular.ttf')  format('truetype'); /* Safari, Android, iOS */
+            }
+            body {
+                margin: 0px;
+            }
+            .sharecode {
+                width: fit-content;
+                margin-top: 5px;
+            }
+            .info-cont {
+                text-align: center;
+                font-family: 'Inter Regular';
+                font-size: 8px;
+                margin-top: 5px;
+                color: rgba(0, 0, 0, .7);
+            }
+            .code-cont {
+                background: #d2d2d2;
+                width: max-content;
+                padding: 10px 10px;
+                color: #6c6c6c;
+                border-radius: 10px;
+                margin: 0 auto;
+            }
+            input[type="text"]:disabled {
+                outline: none;
+                padding: 0px 10px;
+                height: 32px;
+                border: 0px;
+                border-radius: 5px;
+                width: 230px;
+                margin-right: 5px;
+                font-family: 'Inter Regular';
+                letter-spacing: 1px;
+                font-weight: 600;
+                background: white;
+                color: black;
+            }
+            input[type="button"] {
+                height: 32px;
+                padding: 0px 20px;
+                border: 0px;
+                border-radius: 5px;
+                cursor: pointer;
+                margin-left: 0px;
+                outline: none;
+                font-family: 'Inter Bold';
+                color: black;
+                background: white;
+                font-size: 15px;
+            }
+        </style>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                let searchParams = new URLSearchParams(window.location.search);
+                if(searchParams.has('code')) {
+                    $('.share-code').val(searchParams.get('code'));
+                }
+            });
+            $(document).bind("contextmenu",function(e){
+                return false;
+            });
+        </script>
+    </head>
+    <body>
+        <div class="sharecode">
+            <div class="code-cont">
+                <input type="text" class="share-code" name="share-code" value="" disabled>
+                <input type="button" name="copy" value="COPY" class="button">
+            </div>
+            <div class="info-cont">
+                You will be redirected to <a href="https://conwersion.com">conwersion.com</a> to use this script!
+                <br>
+                <a href="priv-pol.html">Click here</a> for Privacy Policy
+            </div>
+        </div>
+        <script type="text/javascript">
+            $('.button').click(function() {
+                function copyToClipboard() {
+                    var copyText = document.getElementsByClassName("share-code")[0];
+                    copyText.select();
+                    copyText.setSelectionRange(0, 99999);
+
+                    document.execCommand("copy");
+                    $('.share-code').val("Code Copied!");
+                }
+                copyToClipboard();
+
+                function handleTimer() {
+                    if(count === 0) {
+                        setTimeout(function() {
+                            clearInterval(timer);
+                        }, 500);
+                        window.top.location.href = "https://conwersion.com";
+                    } else {
+                        $('.share-code').css({"color": "green", "font-style": "italic"});
+                        $('.share-code').val("Redirecting in "+ count +"...");
+                        count--;
+                    }
+                }
+                var count = 3;
+                var timer = setTimeout(function() {
+                    setInterval(function() {
+                        handleTimer(count);
+                    }, 1000);
+                }, 1000);
+            });
+        </script>
+    </body>
+</html>

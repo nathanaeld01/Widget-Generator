@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Widget Generator</title>
+        <link rel="stylesheet" href="ui.css">
+        <script src="https://kit.fontawesome.com/a4f4262069.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div id="main">
+            <div class="logo">
+                <img src="imgs/Conwersion Tools Logo.png" width="350">
+            </div>
+            <div class="generator">
+                <div class="head">
+                    <h2>COPYCODE WIDGET GENERATOR</h2>
+                    <div class="desc">
+                        One of the most friction-free lead collection tool!
+                    </div>
+                </div>
+                <div class="generate">
+                    <div class="sharecode">
+                        <label for="">Enter Your Sharecode <i class="fas fa-info-circle" title="You will get the sharecode from your partners dashboard once you have uploaded any script."></i> : </label>
+                        <br>
+                        <input type="text" class="share-code" value="">
+                        <br>
+                        <input type="button" value="GENERATE" class="gen-btn">
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="code">
+                    <div class="copycode">
+                        <label>Copy and paste this code in your HTML Widget</label>
+                        <br>
+                        <textarea class="copy-code" rows="4" cols="100" value=""></textarea>
+                        <br>
+                        <input type="button" name="copy" value="COPY THE CODE" class="cpy-btn">
+                    </div>
+                    <div class="previewcode">
+                        <div class="sharecode">
+                            <h4>Preview:</h4>
+                            <div class="code-cont">
+                                <input type="text" class="share-text" name="share-code" value="" disabled>
+                                <input type="button" name="copy" value="COPY" class="share-btn">
+                            </div>
+                            <div class="info">
+                                You will be redirected to <a href="https://conwersion.com">conwersion.com</a> to use this script!
+                                <br>
+                                <a href="priv-pol.html">Click here</a> for Privacy Policy
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(document).bind("contextmenu",function(e) {
+                if($('.copy-code').is(':hover'))
+                    return true;
+                else
+                    return false;
+            });
+            $('.share-code').keypress(function(e) {
+                var key = e.which;
+                if (key == 13) // the enter key code
+                {
+                    $(".gen-btn").click();
+                    return false;
+                }
+            });
+            $(".gen-btn").click(function() {
+                var sh_code = $(".share-code").val();
+                var generate = '<iframe src="https://tools.conwersion.com/sharecode.html?code='+ sh_code +'" width="470px" height="120px" style="border: 0px; overflow: hidden;"></iframe>';
+                $('.copy-code').val(generate);
+                $('.code').slideDown(500, "linear");
+                var val = $('.share-code').val();
+                $('.share-text').val(val);
+                $('html, body').animate({
+                    scrollTop: $('body').height()
+                }, 1000);
+            });
+            $(".cpy-btn").click(function() {
+                function copyToClipboard() {
+                    var copyText = document.getElementsByClassName("copy-code")[0];
+                    copyText.select();
+                    copyText.setSelectionRange(0, 99999);
+
+                    document.execCommand("copy");
+                }
+                copyToClipboard();
+            });
+            $('.share-btn').click(function() {
+                function copyToClipboard() {
+                    var copyText = document.getElementsByClassName("share-text")[0];
+                    copyText.select();
+                    copyText.setSelectionRange(0, 99999);
+
+                    document.execCommand("copy");
+                }
+                copyToClipboard();
+            });
+        </script>
+    </body>
+</html>
