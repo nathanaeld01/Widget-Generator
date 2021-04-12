@@ -90,10 +90,12 @@
             $('.button').click(function() {
                 function copyToClipboard() {
                     var copyText = document.getElementsByClassName("share-code")[0];
+                    copyText.disabled = false;
                     copyText.select();
                     copyText.setSelectionRange(0, 99999);
 
                     document.execCommand("copy");
+                    copyText.disabled = true;
                     $('.share-code').val("Code Copied!");
                 }
                 copyToClipboard();
